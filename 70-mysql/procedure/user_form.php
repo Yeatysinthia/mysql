@@ -9,11 +9,13 @@ if($connect){
 }
 
 if(isset($_POST['submit'])) {
-    // $id = $_POST['id'];
+    $id = $_POST['id'];
     $uname = $_POST['name'];
 
     $connect->query("CALL call_users('$uname')");
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,14 +26,31 @@ if(isset($_POST['submit'])) {
 <body>
 
 <form method="POST" action="#">
-    <!-- <label>ID:</label>
-    <input type="text" name="id" required><br><br> -->
+    <label>ID:</label>
+    <input type="text" name="id" required><br><br>
 
     <label>Name:</label>
     <input type="text" name="name" required><br><br>
 
     <button type="submit" name="submit">Insert</button>
 </form>
+<hr>
+<table>
+<?php 
+$show = $connect->query("SELECT * FROM show_data");
+while(list($uname)=$show->fetch_row()){
+ 
+echo "<tr>
+    <td>$id</td>
+    <td>$uname</td>
+
+</tr>";
+}
+
+?>
+
+</table>
+
 
 </body>
 </html>
